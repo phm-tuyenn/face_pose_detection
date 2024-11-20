@@ -202,7 +202,7 @@ def find_pose(points):
     Xfrontal = (-90+90 / 0.5 * dXnose / dXtot) if dXtot != 0 else 0
     Yfrontal = (-90+90 / 0.5 * dYnose / dYtot) if dYtot != 0 else 0
 
-    return angle * 180 / np.pi, Xfrontal, Yfrontal
+    return [angle * 180 / np.pi, Xfrontal, Yfrontal]
 
 
 font = cv2.FONT_HERSHEY_COMPLEX # Text in video
