@@ -12,3 +12,5 @@ class RollKalman:
     Q = 1
     R = 2
     N = 3
+
+DELAY_NUMBER = 50

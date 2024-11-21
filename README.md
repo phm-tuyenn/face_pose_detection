@@ -10,11 +10,14 @@ opencv-python
 pandas
 matplotlib
 tensorflow
+pynput
+playsound
 ```
 ## Run
 Just run the `main.py` and it will show some data with your detected face.
 ## Contribute
-I'm working in Kalman filter because the output number is so much noise and I'm finding some covariances `Q` and `R`. If anyone can help me please make a pull request.
+I'm done the detect part!!!
+Now, who can help me the setting part??? Just make a PR!
 
 Also, if anyone can optimize the filter algorithm please make a pull request. Thank you!
 # Shout out to [@fisakhan](https://github.com/fisakhan/) because of good code.
