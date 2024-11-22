@@ -13,8 +13,9 @@ tensorflow
 pynput
 playsound
 ```
+or run `pip install -r requirements.txt`
 ## Run
-Just run the `main.py` and it will show some data with your detected face.
+Just run `python ./detect/main.py` and it will show some data with your detected face.
 ## Contribute
 I'm done the detect part!!!
 Now, who can help me the setting part??? Just make a PR!
