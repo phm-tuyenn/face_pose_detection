@@ -9,15 +9,18 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 class Warn:
-    MessageBox = ctypes.windll.user32.MessageBoxW
-    thread = threading.Thread()
+    warnThread = threading.Thread()
+    ranThread = threading.Thread(target = lambda : ctypes.windll.user32.MessageBoxW(None, "Chuơng trình giám sát đã được bắt đầu", "Hệ thống giám sát", 0X40 | 0x1000))
 
     def showMessage(self, message):
-        self.thread = threading.Thread(target = lambda : self.MessageBox(None, message, "Hệ thống giám sát", 0X40 | 0x1000))
-        self.thread.start()
+        self.warnThread = threading.Thread(target = lambda : ctypes.windll.user32.MessageBoxW(None, message, "Hệ thống giám sát", 0X40 | 0x1000))
+        self.warnThread.start()
+
+    def showOpeningMessage(self):
+        self.ranThread.start()
 
     def isMessageOpen(self):
-        return self.thread.is_alive()
+        return self.warnThread.is_alive()
 
     def setMaxVol(self):
         keyboard = Controller()

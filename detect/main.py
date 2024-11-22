@@ -25,6 +25,8 @@ print("camera resolution: {}".format(res_actual))
 delay_count = 0
 time_stamp = -1
 
+warn.showOpeningMessage()
+
 while (True):     
     rets, frame = cap.read()
     if not (rets):
