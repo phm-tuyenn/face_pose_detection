@@ -34,4 +34,4 @@ class Warn:
 
     def playAlarm(self):
         self.setMaxVol()
-        playsound(resource_path("./alarm.mp3"))
+        playsound(resource_path("alarm.mp3"))
