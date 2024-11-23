@@ -32,7 +32,7 @@
 # and provides the keypoints of faces as outputs along with the bounding boxes.
 #
 
-import cv2
+import cv2, os, sys
 import numpy as np
 import pkg_resources
 import tensorflow as tf
@@ -42,6 +42,10 @@ from mtcnn.exceptions import InvalidImage
 
 __author__ = "Iván de Paz Centeno"
 
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    base_path=getattr(sys,'_MEIPASS',os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
 
 class PNet(Network):
     """
@@ -178,7 +182,7 @@ class MTCNN(object):
             steps_threshold = [0.6, 0.7, 0.7]
 
         if weights_file is None:
-            weights_file = pkg_resources.resource_stream('mtcnn', 'data/mtcnn_weights.npy')
+            weights_file = pkg_resources.resource_stream('mtcnn', resource_path('data/mtcnn_weights.npy'))
 
         self.__min_face_size = min_face_size
         self.__steps_threshold = steps_threshold
