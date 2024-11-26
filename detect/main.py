@@ -75,6 +75,6 @@ while (True):
     if time_stamp != -1 and (time.time() - time_stamp) >= 120 and warn.isMessageOpen():
         warn.playAlarm()
         time_stamp = time.time()
-
+        
 cap.release()
 cv2.destroyAllWindows()
