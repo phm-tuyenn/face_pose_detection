@@ -23,6 +23,7 @@ def show(data):
     Label(top, text="Mật khẩu của phụ huynh:").grid(row=1, column=0)
 
     code = Entry(top)
+    code.insert(0, data["code"])
     code.grid(row=0, column=1)
     password = Entry(top, show="*")
     password.grid(row=1, column=1)
