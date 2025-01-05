@@ -1,6 +1,6 @@
 import ctypes, threading
 from pynput.keyboard import Key, Controller
-import time, os, sys, datetime
+import time, os, sys, time, json
 from playsound import playsound
 
 def resource_path(relative_path):
@@ -16,12 +16,13 @@ class Warn:
         try:
             open(filename, "r").close()
         except:
-            open(filename, "w").close()
+            open(filename, "w").write("[]")
         with open(filename, 'r', encoding="utf-8") as original:
-            data = original.read()
+            data = json.loads(original.read())
             original.close()
         with open(filename, 'w', encoding="utf-8") as modified:
-            modified.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ": " + message + "\n" + data)
+            new = [{"timestamp": int(time.time() * 1000), "noti": message}]
+            modified.write(json.dumps(new + data, ensure_ascii=False))
             modified.close()
 
     def showMessage(self, message):

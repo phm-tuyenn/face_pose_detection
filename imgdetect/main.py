@@ -1,4 +1,4 @@
-import cv2, time, json, os, threading, checkTrig
+import cv2, time, json, os, threading, checkTrig, uploadLog
 from random import randrange
 import numpy as np
 from pose_detection_mtcnn import *
@@ -42,7 +42,8 @@ if not os.path.exists(filename):
         "code": str(randrange(10)) + str(randrange(10)) + str(randrange(10)) + str(randrange(10)),
         "password": "$2b$12$zoHuqo7EpPxE0bTNOTh6LOlvjuJFdgaE/dpUl0.2RemQkdlSoto4u",
         "detectTime": 2,
-        "alarmTime": 120
+        "alarmTime": 120,
+        "runAtStartup": False
     }))
     f.close()
 
@@ -53,6 +54,7 @@ def getOpenTrigger():
         return False
     
 threading.Thread(target=checkTrig.loop).start()
+threading.Thread(target=uploadLog.loop).start()
 
 while True:
     print("app ok")
@@ -111,3 +113,5 @@ while True:
         if time_stamp != -1 and (time.time() - time_stamp) >= data["alarmTime"] and warn.isMessageOpen():
             warn.playAlarm()
             time_stamp = time.time()
+    
+    warn.writeLog("Phần mềm giám sát đã được tắt")
