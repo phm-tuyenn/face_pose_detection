@@ -1,0 +1,1 @@
+python ./setting/main.py

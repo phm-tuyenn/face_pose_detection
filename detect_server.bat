@@ -1,0 +1,1 @@
+python ./imgdetect/main.py
