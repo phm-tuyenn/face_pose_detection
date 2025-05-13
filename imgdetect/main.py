@@ -35,7 +35,6 @@ if not os.path.exists(openPath):
     f.close()
 
 filename = os.path.join("C:", "Users", "Public", "setting.json")
-data = json.loads(open(filename, "r", encoding="utf8").read())
 if not os.path.exists(filename):
     f = open(filename, "w")
     f.write(json.dumps({
@@ -43,7 +42,8 @@ if not os.path.exists(filename):
         "password": "$2b$12$zoHuqo7EpPxE0bTNOTh6LOlvjuJFdgaE/dpUl0.2RemQkdlSoto4u",
         "detectTime": 2,
         "alarmTime": 120,
-        "runAtStartup": False
+        "runAtStartup": False,
+        "text": "Bạn đang không hướng mặt vào màn hình!"
     }))
     f.close()
 
@@ -62,6 +62,7 @@ while True:
     # TODO: do a trigger from http server in localhost
     while not getOpenTrigger(): pass
 
+    data = json.loads(open(filename, "r", encoding="utf8").read())
     warn.showOpeningMessage(data["code"])
 
     while getOpenTrigger():
@@ -94,7 +95,7 @@ while True:
 
             print(processed_Xfrontal, processed_Yfrontal, time_detect)
 
-            if (abs(processed_Xfrontal) > 50 or abs(processed_Yfrontal) > 50):
+            if (abs(processed_Xfrontal) > 30 or abs(processed_Yfrontal) > 30):
                 if time_detect == -1: 
                     time_detect = time.time()
             else:
@@ -106,7 +107,7 @@ while True:
         if (time_detect != -1 and (time.time() - time_detect) >= data["detectTime"]):
             print("hey")
             if not warn.isMessageOpen():
-                warn.showMessage("Bạn đang không hướng mặt vào màn hình!")
+                warn.showMessage(data["text"])
                 time_stamp = time.time()
             time_detect = -1
         
@@ -115,3 +116,5 @@ while True:
             time_stamp = time.time()
     
     warn.writeLog("Phần mềm giám sát đã được tắt")
+    cap.release()
+    cap.open(camera)

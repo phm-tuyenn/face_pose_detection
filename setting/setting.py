@@ -17,9 +17,10 @@ def changepassword(_data, filename):
         with open(filename, 'r', encoding="utf-8") as f:
             data = json.loads(f.read()) 
 
-def save(data, filename, detectTime, alarmTime):
+def save(data, filename, detectTime, alarmTime, textLine):
     data["detectTime"] = int(detectTime)
     data["alarmTime"] = int(alarmTime)
+    data["text"] = textLine
     data["runAtStartup"] = check_var.get()
     f = open(filename, "w")
     f.write(json.dumps(data))
@@ -32,7 +33,8 @@ def show(_data, filename):
     
     Label(top, text="Thời gian nhận diện (giây):").grid(row=1, column=0)
     Label(top, text="Thời gian báo hiệu âm thanh (giấy):").grid(row=2, column=0)
-    Label(top, text="Khởi chạy cùng Windows:").grid(row=3, column=0)
+    Label(top, text="Lời nhắc:").grid(row=3, column=0)
+    Label(top, text="Khởi chạy cùng Windows:").grid(row=4, column=0)
 
     detectTime = Entry(top)
     detectTime.insert(0, str(data["detectTime"]))
@@ -40,16 +42,19 @@ def show(_data, filename):
     alarmTime = Entry(top)
     alarmTime.insert(0, str(data["alarmTime"]))
     alarmTime.grid(row=2, column=1)
+    textLine = Entry(top)
+    textLine.insert(0, str(data["text"]))
+    textLine.grid(row=3, column=1)
 
     startup = Checkbutton(top, variable=check_var)
     if data["runAtStartup"]:
         startup.select()
     else:
         startup.deselect()
-    startup.grid(row=3, column=1)
+    startup.grid(row=4, column=1)
 
-    Button(top, text="Lưu thông tin", command=lambda: save(data, filename, detectTime.get(), alarmTime.get())).grid(row=4, column=0, columnspan=2)
-    Label(top, textvariable=notify, fg="green").grid(row=5, column=0, columnspan=2)
+    Button(top, text="Lưu thông tin", command=lambda: save(data, filename, detectTime.get(), alarmTime.get(), textLine.get())).grid(row=5, column=0, columnspan=2)
+    Label(top, textvariable=notify, fg="green").grid(row=6, column=0, columnspan=2)
     
     utils.center(top)
     utils.focus(top)
