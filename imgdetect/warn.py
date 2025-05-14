@@ -12,7 +12,7 @@ class Warn:
     warnThread = threading.Thread()
 
     def writeLog(self, message):
-        filename = os.path.join("C:", "Users", "Public", "detect_log.json")
+        filename = os.path.join("C:/", "Users", "Public", "detect_log.json")
         try:
             open(filename, "r").close()
         except:

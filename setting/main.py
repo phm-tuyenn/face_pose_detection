@@ -1,7 +1,7 @@
 import os, json
 from random import randrange
 
-filename = os.path.join("C:", "Users", "Public", "setting.json")
+filename = os.path.join("C:/", "Users", "Public", "setting.json")
 if not os.path.exists(filename):
     f = open(filename, "w")
     f.write(json.dumps({

@@ -26,7 +26,7 @@ print("camera resolution: {}".format(res_actual))
 time_detect = -1
 time_stamp = -1
 
-openPath = os.path.join("C:", "Users", "Public", "open.json")
+openPath = os.path.join("C:/", "Users", "Public", "open.json")
 if not os.path.exists(openPath):
     f = open(openPath, "w")
     f.write(json.dumps({
@@ -34,7 +34,7 @@ if not os.path.exists(openPath):
     }))
     f.close()
 
-filename = os.path.join("C:", "Users", "Public", "setting.json")
+filename = os.path.join("C:/", "Users", "Public", "setting.json")
 if not os.path.exists(filename):
     f = open(filename, "w")
     f.write(json.dumps({
