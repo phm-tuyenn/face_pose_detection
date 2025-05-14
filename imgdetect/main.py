@@ -1,4 +1,4 @@
-import cv2, time, json, os, threading, checkTrig, uploadLog
+import cv2, time, json, os, threading, checkTrig, uploadLog, requests
 from random import randrange
 import numpy as np
 from pose_detection_mtcnn import *
@@ -116,5 +116,6 @@ while True:
             time_stamp = time.time()
     
     warn.writeLog("Phần mềm giám sát đã được tắt")
+    requests.get('https://giamsathoctap.vercel.app/api/setEnable?code=' + data["code"] + '&enable=false')
     cap.release()
     cap.open(camera)
